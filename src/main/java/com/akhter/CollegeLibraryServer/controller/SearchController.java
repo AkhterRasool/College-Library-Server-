@@ -9,15 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/search")
+public class SearchController {
 
     @Autowired
     private BookService bookService;
 
     @GetMapping("/book/{title}")
-    public Book getBook(@PathVariable String title) throws BookNotFoundException {
+    public Book getBookByTitle(@PathVariable String title) throws BookNotFoundException {
         return bookService.findBookByTitle(title);
     }
+
+    @GetMapping("/author/{author}")
+    public List<Book> getBookByAuthor(@PathVariable String author) {
+        return bookService.findByBookByAuthor(author);
+    }
+
 }
