@@ -8,7 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -23,21 +24,13 @@ public class Book {
     @Column
     private String author;
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(
             name = "book_book_location",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "location_id", referencedColumnName = "id")
     )
-    private BookLocation bookLocation;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private List<BookLocation> bookLocation;
 
     public String getTitle() {
         return title;
@@ -55,11 +48,11 @@ public class Book {
         this.author = author;
     }
 
-    public BookLocation getBookLocation() {
+    public List<BookLocation> getBookLocation() {
         return bookLocation;
     }
 
-    public void setBookLocation(BookLocation bookLocation) {
+    public void setBookLocation(List<BookLocation> bookLocation) {
         this.bookLocation = bookLocation;
     }
 }
