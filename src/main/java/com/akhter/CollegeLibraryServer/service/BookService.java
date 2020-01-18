@@ -1,6 +1,7 @@
 package com.akhter.CollegeLibraryServer.service;
 
 import com.akhter.CollegeLibraryServer.entity.Book;
+import com.akhter.CollegeLibraryServer.exception.AuthorNotFoundException;
 import com.akhter.CollegeLibraryServer.exception.BookNotFoundException;
 import com.akhter.CollegeLibraryServer.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ public class BookService {
         return book.orElseThrow(BookNotFoundException::new);
     }
 
-    public List<Book> findByBookByAuthor(String author) {
-        return bookRepository.findByAuthor(author);
+    public List<Book> findByBookByAuthor(String author) throws AuthorNotFoundException {
+        List<Book> booksAuthored = bookRepository.findByAuthor(author);
+        if (booksAuthored.isEmpty()) {
+            throw new AuthorNotFoundException();
+        }
+        return booksAuthored;
     }
 }
