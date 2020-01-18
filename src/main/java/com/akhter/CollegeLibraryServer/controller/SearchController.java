@@ -18,7 +18,7 @@ public class SearchController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping("/book/{title}")
+    @GetMapping("/title/{title}")
     public Book getBookByTitle(@PathVariable String title) throws BookNotFoundException {
         return bookService.findBookByTitle(title);
     }
