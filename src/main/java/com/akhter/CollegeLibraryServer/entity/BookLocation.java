@@ -5,22 +5,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import java.util.Objects;
 
 @Entity(name = "book_location")
+@Table(uniqueConstraints = @UniqueConstraint(name = "unique_location", columnNames = {"col", "rack", "row_num"}))
 public class BookLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(unique = true)
     private int rack;
 
-    @Column
+    @Column(unique = true, name = "row_num")
     private int row;
 
-    @Column
+    @Column(unique = true)
     private int col;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getRack() {
         return rack;
@@ -44,5 +56,20 @@ public class BookLocation {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rack, col, row);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        BookLocation location = (BookLocation) obj;
+        return location.row == this.row && location.col == this.col && location.rack == this.rack;
     }
 }

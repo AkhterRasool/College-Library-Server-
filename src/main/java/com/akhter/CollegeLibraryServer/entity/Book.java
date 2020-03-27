@@ -1,6 +1,7 @@
 package com.akhter.CollegeLibraryServer.entity;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Book {
     @Column
     private String author;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "book_book_location",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
@@ -54,5 +55,13 @@ public class Book {
 
     public void setBookLocation(List<BookLocation> bookLocation) {
         this.bookLocation = bookLocation;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
