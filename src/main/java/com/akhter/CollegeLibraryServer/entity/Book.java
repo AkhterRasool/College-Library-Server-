@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
+
 @Entity
 public class Book {
 
@@ -21,9 +22,6 @@ public class Book {
 
     @Column
     private String title;
-
-    @Column
-    private String author;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -39,14 +37,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public List<BookLocation> getBookLocation() {

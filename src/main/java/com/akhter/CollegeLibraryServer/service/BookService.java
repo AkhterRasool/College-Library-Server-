@@ -27,11 +27,7 @@ public class BookService {
     }
 
     public List<Book> findByBookByAuthor(String author) throws AuthorNotFoundException {
-        List<Book> booksAuthored = bookRepository.findByAuthor(author);
-        if (booksAuthored.isEmpty()) {
-            throw new AuthorNotFoundException();
-        }
-        return booksAuthored;
+        throw new UnsupportedOperationException("Functionality is pending.");
     }
 
     public void insertBook(Book book) {
