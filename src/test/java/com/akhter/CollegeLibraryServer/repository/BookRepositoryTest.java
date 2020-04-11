@@ -3,14 +3,14 @@ package com.akhter.CollegeLibraryServer.repository;
 import com.akhter.CollegeLibraryServer.entity.Book;
 import com.akhter.CollegeLibraryServer.entity.BookLocation;
 import org.hamcrest.core.Is;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookRepositoryTest extends RepositoryTest {
 

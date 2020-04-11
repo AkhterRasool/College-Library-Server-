@@ -26,6 +26,8 @@ public class BookLocation {
     @Column(unique = true)
     private int col;
 
+    public BookLocation() {}
+
     public int getId() {
         return id;
     }

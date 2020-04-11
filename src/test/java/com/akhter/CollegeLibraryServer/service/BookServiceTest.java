@@ -1,7 +1,10 @@
 package com.akhter.CollegeLibraryServer.service;
 
+import com.akhter.CollegeLibraryServer.entity.Author;
 import com.akhter.CollegeLibraryServer.entity.Book;
+import com.akhter.CollegeLibraryServer.exception.AuthorNotFoundException;
 import com.akhter.CollegeLibraryServer.exception.BookNotFoundException;
+import com.akhter.CollegeLibraryServer.repository.AuthorRepository;
 import com.akhter.CollegeLibraryServer.repository.BookRepository;
 import org.hamcrest.core.Is;
 import org.junit.Test;
@@ -21,6 +24,9 @@ public class BookServiceTest {
     @Mock
     private BookRepository bookRepository;
 
+    @Mock
+    private AuthorRepository authorRepository;
+
     @InjectMocks
     private BookService bookService;
 
@@ -31,7 +37,7 @@ public class BookServiceTest {
         book.setTitle(title);
         when(bookRepository.findByTitle(title)).thenReturn(Optional.ofNullable(book));
 
-        Book bookByTitle = bookService.findBookByTitle(title);
+        Book bookByTitle = bookService.findBook(title);
 
         assertThat(bookByTitle.getTitle(), Is.is(title));
     }
@@ -41,12 +47,26 @@ public class BookServiceTest {
         String title = "computer architecture";
         when(bookRepository.findByTitle(title)).thenReturn(Optional.empty());
 
-        bookService.findBookByTitle(title);
+        bookService.findBook(title);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void findBookByAuthor() throws UnsupportedOperationException {
-        String author = "Albert Silberschatsz";
-        bookService.findByBookByAuthor(author);
+    @Test
+    public void findBookByAuthor() throws AuthorNotFoundException {
+        String authorName = "Albert Silberschatsz";
+        Author givenAuthor = new Author();
+        givenAuthor.setName(authorName);
+        when(authorRepository.findByName(authorName)).thenReturn(Optional.of(givenAuthor));
+
+        Author author = bookService.findAuthor(authorName);
+
+        assertThat(author.getName(), Is.is(authorName));
+    }
+
+    @Test(expected = AuthorNotFoundException.class)
+    public void findInvalidAuthor() throws AuthorNotFoundException {
+        String authorName = "aoisudasda";
+        when(authorRepository.findByName(authorName)).thenReturn(Optional.empty());
+
+        bookService.findAuthor(authorName);
     }
 }
