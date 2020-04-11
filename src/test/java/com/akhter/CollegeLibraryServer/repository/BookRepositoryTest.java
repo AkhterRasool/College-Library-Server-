@@ -3,7 +3,7 @@ package com.akhter.CollegeLibraryServer.repository;
 import com.akhter.CollegeLibraryServer.entity.Book;
 import com.akhter.CollegeLibraryServer.entity.BookLocation;
 import org.hamcrest.core.Is;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
