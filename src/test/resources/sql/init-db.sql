@@ -19,8 +19,8 @@ CREATE TABLE  book_author_mapping (
 book_id int(10) NOT NULL,
 author_id int(10)NOT NULL,
 UNIQUE KEY book_author_key(book_id, author_id),
-CONSTRAINT book_author_mapping_ibfk_1 FOREIGN KEY(book_id)REFERENCES book(id),
-CONSTRAINT book_author_mapping_ibfk_2 FOREIGN KEY(author_id)REFERENCES author(id)
+CONSTRAINT book_author_mapping_ibfk_1 FOREIGN KEY(book_id)REFERENCES book(id) ON DELETE CASCADE,
+CONSTRAINT book_author_mapping_ibfk_2 FOREIGN KEY(author_id)REFERENCES author(id) ON DELETE CASCADE
 );
 
 drop table if exists book_location;
@@ -39,8 +39,8 @@ CREATE TABLE  book_book_location (
 book_id int(11) NOT NULL,
 location_id int(11)NOT NULL,
 UNIQUE KEY book_location_key(book_id, location_id),
-CONSTRAINT book_id FOREIGN KEY(book_id)REFERENCES book(id),
-CONSTRAINT location_id FOREIGN KEY(location_id)REFERENCES book_location(id)
+CONSTRAINT book_id FOREIGN KEY(book_id)REFERENCES book(id) ON DELETE CASCADE,
+CONSTRAINT location_id FOREIGN KEY(location_id)REFERENCES book_location(id) ON DELETE CASCADE
 );
 
 drop table if exists student;
@@ -55,7 +55,7 @@ CREATE TABLE  fine (
 student_id int(11) NOT NULL,
 amount double DEFAULT NULL,
 PRIMARY KEY(student_id),
-CONSTRAINT student_id FOREIGN KEY(student_id)REFERENCES student(id)
+CONSTRAINT student_id FOREIGN KEY(student_id)REFERENCES student(id) ON DELETE CASCADE
 );
 
 drop table if exists  student_books_issued;
@@ -64,7 +64,7 @@ student_id int(11) NOT NULL,
 book_id int(11)NOT NULL,
 PRIMARY KEY(student_id),
 UNIQUE KEY student_book_key(student_id, book_id),
-CONSTRAINT student_books_issued_ibfk_1 FOREIGN KEY(student_id)REFERENCES student(id),
-CONSTRAINT student_books_issued_ibfk_2 FOREIGN KEY(book_id)REFERENCES book(id)
+CONSTRAINT student_books_issued_ibfk_1 FOREIGN KEY(student_id)REFERENCES student(id) ON DELETE CASCADE,
+CONSTRAINT student_books_issued_ibfk_2 FOREIGN KEY(book_id)REFERENCES book(id) ON DELETE CASCADE
 );
 

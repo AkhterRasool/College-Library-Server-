@@ -1,12 +1,11 @@
 package com.akhter.CollegeLibraryServer.repository;
 
 import com.akhter.CollegeLibraryServer.entity.Book;
-import com.akhter.CollegeLibraryServer.entity.BookLocation;
+import com.akhter.CollegeLibraryServer.util.BookUtils;
 import org.hamcrest.core.Is;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.Assert.assertThat;
@@ -18,15 +17,9 @@ public class BookRepositoryTest extends RepositoryTest {
     private BookRepository bookRepository;
 
     @Test
-    public void retrievalTest() {
-        String title = "computer architecture";
-        Book book = new Book();
-        book.setTitle(title);
-        BookLocation bookLocation = new BookLocation();
-        bookLocation.setRack(2);
-        bookLocation.setRow(3);
-        bookLocation.setCol(4);
-        book.setBookLocation(Arrays.asList(bookLocation));
+    public void retrieveBook() {
+        String title = "Computer Architecture";
+        Book book = BookUtils.completeBookSetup(title);
 
         entityManager.persist(book);
 

@@ -1,5 +1,7 @@
 package com.akhter.CollegeLibraryServer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,15 +17,16 @@ public class BookLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private int id;
 
-    @Column(unique = true)
+    @Column
     private int rack;
 
-    @Column(unique = true, name = "row_num")
+    @Column(name = "row_num")
     private int row;
 
-    @Column(unique = true)
+    @Column
     private int col;
 
     public BookLocation() {}
