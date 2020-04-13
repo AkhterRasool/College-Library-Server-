@@ -31,7 +31,7 @@ public class StudentRepositoryTest extends RepositoryTest {
         bookLocation.setRack(2);
         bookLocation.setRow(3);
         bookLocation.setCol(4);
-        book.setBookLocation(Collections.singletonList(bookLocation));
+        book.setBookLocations(Collections.singletonList(bookLocation));
         student.setBooksIssued(Collections.singletonList(book));
 
         entityManager.persist(student);
