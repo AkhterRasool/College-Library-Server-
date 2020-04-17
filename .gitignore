@@ -2,6 +2,7 @@ HELP.md
 .gradle
 build/
 !gradle/wrapper/**
+!gradlew/wrapper/gradle-wrapper.properties
 !**/src/main/**
 !**/src/test/**
 
